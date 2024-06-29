@@ -1,8 +1,15 @@
 import { Button } from 'react-materialize'
-
+import { useRef } from 'react'
 //Individual drum pad design for the drum-machine component
 //focuses on the looks and passes the data of each button
-function DrumPad({id, className, letter, children, onClick, src}) {
+function DrumPad({divId, audioId, className, audioSrc, playAudio, soundText, keyTrigger}) {
+  const audioRef = useRef(null)
+  //const [text, setText] = useState("")
+
+  function handleClick() {
+    playAudio(audioRef, soundText)
+    //setText(textSource)
+  }
 
 
   //Redo all this: 
@@ -48,8 +55,8 @@ function DrumPad({id, className, letter, children, onClick, src}) {
 */
   return (
   
-    <div className={className} key={letter} id={id}>
-      <Button onClick={onClick}><audio id={id} src={src} className="clip"></audio>{children}</Button>
+    <div className={className} id={divId}>
+      <Button id={keyTrigger} onClick={handleClick}>{keyTrigger}<audio className="clip" id={audioId} ref={audioRef} src={audioSrc}></audio></Button>
     </div>
    
   )  
