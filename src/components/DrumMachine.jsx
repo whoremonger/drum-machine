@@ -47,7 +47,7 @@ function DrumMachine() {
     }
   }, [volume])
 */
-  function playAudio(audioRef, soundText) {
+  function playAudio(audioRef, soundText, volume) {
     //const audio = new Audio(drumSource)
     const audio = audioRef.current
     if (audio) {
@@ -58,6 +58,10 @@ function DrumMachine() {
     } 
   }
 
+  function handleVolumeChange(e) {
+    setVolume(e.target.value)
+  }
+/*
   function handleKeyPress(e) {
     const key = e.key.toUpperCase()
     const sound = drumData.find(s => s.keyTrigger === key)
@@ -72,21 +76,20 @@ function DrumMachine() {
       document.removeEventListener("keydown", handleKeyPress)
     }
   }, []) 
-  function handleVolumeChange(e) {
-    setVolume(e.target.value)
-  }
+*/
+  
 
   return (
       <div className="container" id="drum-machine">
         <h1>Drum Machine</h1>
           <div id="display">
+            {text && <h3>{text}</h3>}
             {drumData.map((item) => (
-              <DrumPad key={item.id} divId={item.id} audioSrc={item.src} className="drum-pad" audioId={item.id} playAudio={playAudio} keyTrigger={item.keyTrigger} soundText={item.shout}>
+              <DrumPad key={item.id} divId={item.id} audioSrc={item.src} className="drum-pad" audioId={item.id} playAudio={playAudio} keyTrigger={item.keyTrigger} soundText={item.shout} volume={volume}>
                 {item.id}
               </DrumPad>
               
             ))}
-              {text && <h3>{text}</h3>}
             <div>
               <label htmlFor="volume"><h5>Volume</h5></label>
               <input id="volume" type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolumeChange}/>

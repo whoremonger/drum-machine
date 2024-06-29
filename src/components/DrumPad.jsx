@@ -1,15 +1,28 @@
 import { Button } from 'react-materialize'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 //Individual drum pad design for the drum-machine component
 //focuses on the looks and passes the data of each button
-function DrumPad({divId, audioId, className, audioSrc, playAudio, soundText, keyTrigger}) {
+function DrumPad({divId, audioId, className, audioSrc, playAudio, soundText, keyTrigger, volume}) {
   const audioRef = useRef(null)
   //const [text, setText] = useState("")
 
   function handleClick() {
-    playAudio(audioRef, soundText)
-    //setText(textSource)
+    playAudio(audioRef, soundText, volume)
   }
+
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key.toUpperCase() === keyTrigger) {
+        playAudio(audioRef, soundText, volume)
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [keyTrigger, playAudio, soundText, volume])
+ 
+    
 
 
   //Redo all this: 
@@ -56,7 +69,10 @@ function DrumPad({divId, audioId, className, audioSrc, playAudio, soundText, key
   return (
   
     <div className={className} id={divId}>
-      <Button id={keyTrigger} onClick={handleClick}>{keyTrigger}<audio className="clip" id={audioId} ref={audioRef} src={audioSrc}></audio></Button>
+      <Button id={keyTrigger} onClick={handleClick}>
+        {keyTrigger}
+        <audio className="clip" id={audioId} ref={audioRef} src={audioSrc}></audio>
+      </Button>
     </div>
    
   )  
