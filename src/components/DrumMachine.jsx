@@ -4,8 +4,6 @@ import { Button, Card, Row, Col } from 'react-materialize'
 import DrumPad from './DrumPad'
 import '../App.css'
 
-
-
 //uses react-materialize 2.5.2
 
 function DrumMachine() {
@@ -24,7 +22,7 @@ function DrumMachine() {
         playSound(e.key.toUpperCase())
       })
     }
-  }, [])
+  }, [volume])
 
 //redesign the pads and machine to look good
 //add volume bar
@@ -48,8 +46,16 @@ function DrumMachine() {
       setShout(selectedDrum.shout)
       setPressedKey(selector)
     }
-    audio.play()
-    
+    if (audio) {
+      audio.volume = volume
+      audio.play()
+    }
+  
+  }
+
+  function handleVolumeChange(e) {
+    const newVolume = parseFloat(e.target.value)
+    setVolume(newVolume)
   }
 
   return (
@@ -68,29 +74,15 @@ function DrumMachine() {
             </DrumPad>
           ))}
         </div>
-        {/*}
-        <div>
+        
+        <div className="volume-bar">
           <label htmlFor="volume"><h5>Volume</h5></label>
-          <input id="volume" type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolumeChange}/>
+          <input id="volume" type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolumeChange} className="volume-slider"/>
         </div>  
-          {*/}  
-
-           {/*}
-            <div key={item.src} onClick={() => { playSound(item.id) }} className="drum-pad" id={item.src}>
-              {item.id}
-              <audio className="clip" id={item.id} src={item.src}></audio>
-            </div>      
-          */}     
     </div>        
   )
 
 }
 
 export default DrumMachine
-
- {/*}
-            <DrumPad key={item.id} divId={item.id} audioSrc={item.src} className="drum-pad" audioId={item.id} playAudio={playAudio} name={item.name} keyTrigger={item.id} volume={volume}>
-              {item.id}
-            </DrumPad>
-          */}
 
