@@ -18,12 +18,16 @@ html, body {
   margin-bottom: 20px;
   color: rgb(245, 8, 8);
   font-size: 24pt;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .drum-machine-app {
  max-width: 800px;
  width: 100%;
- padding: 0 20px;
+ padding: 20px 20px;
+ border:rgba(0, 0, 0, 0.3);
 }
 
 
@@ -97,6 +101,13 @@ html, body {
 
 .volume-bar input[type="range"]::-webkit-slider-thumb:hover {
   background: #0056b3;
+}
 
+.container {
+  border: 5px 5px;
+  border-radius: 20%;
+  background-color: silver;
+  padding: 20px 20px;
+}
 
 

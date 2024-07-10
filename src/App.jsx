@@ -6,7 +6,7 @@ import { Button, Card, Row, Col } from 'react-materialize'
 function App() {
  
   return (
-    <div className="drum-machine-app">
+    <div className="container drum-machine-app">
       <DrumMachine />
     </div>
      

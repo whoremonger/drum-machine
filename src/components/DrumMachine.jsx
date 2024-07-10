@@ -59,7 +59,7 @@ function DrumMachine() {
   }
 
   return (
-    <div className="container" id="drum-machine">
+    <div id="drum-machine">
       <h1 className="title">Drum Machine</h1>
         <h3 id="display">{shout}</h3>
         <div className="drum-pads">
